@@ -1,7 +1,12 @@
 require('dotenv').config()
 
 var Twitter = require('twitter');
+var amazon = require('amazon-product-api');
 
+var client = amazon.createClient({
+  awsId: process.env.AWS_ID,
+  awsSecret: process.env.AWS_SECRET,
+});
 
 var client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -15,3 +20,16 @@ client.post('statuses/update', {status: 'trrrrt'},  function(error, tweet, respo
   console.log(tweet);  // Tweet body.
   console.log(response);  // Raw response object.
 });
+
+//
+// client.itemSearch({
+//   director: 'Quentin Tarantino',
+//   actor: 'Samuel L. Jackson',
+//   searchIndex: 'DVD',
+//   audienceRating: 'R',
+//   responseGroup: 'ItemAttributes,Offers,Images'
+// }).then(function(results){
+//   console.log(results);
+// }).catch(function(err){
+//   console.log(err);
+// });
